@@ -10,11 +10,11 @@ import { AuthService } from '../services/auth.service'
 })
 /** user-detail component*/
 export class UserDetailComponent implements OnInit {
-  private editMode: boolean = true;
-  private user: User = null;
-  private routerPath: UserAccess[];
-  private userPath: UserAccess[];
-  private availablePath: UserAccess[];
+  editMode: boolean = true;
+  user: User = null;
+  routerPath: UserAccess[];
+  userPath: UserAccess[];
+  availablePath: UserAccess[];
 
   /** user-detail ctor */
   constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService, private _authService: AuthService) {

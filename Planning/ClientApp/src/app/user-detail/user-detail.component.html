@@ -1,0 +1,32 @@
+<div>
+  <div>
+    <label>First Name</label>
+    <input *ngIf="editMode" type="text" class="form-control" [(ngModel)]="user.firstName" />
+    <span *ngIf="!editMode">{{ user.firstName }}</span>
+  </div>
+  <div>
+    <label>Last Name</label>
+    <input *ngIf="editMode" type="text" class="form-control" [(ngModel)]="user.lastName" />
+    <span *ngIf="!editMode">{{ user.lastName }}</span>
+  </div>
+  <div>
+    <label>Date of birth</label>
+    <input *ngIf="editMode" type="date" class="form-control" ngbDatepicker [ngModel]="user.dateOfBirth | date:'yyyy-MM-dd'" (ngModelChange)="task.startDate = $event" />
+    <span *ngIf="!editMode">{{ user.dateOfBirth | date:'yyyy-MM-dd' }}</span>
+  </div>
+  <div>
+    <label>Enter date</label>
+    <input *ngIf="editMode" type="date" class="form-control" ngbDatepicker [ngModel]="user.enterDate | date:'yyyy-MM-dd'" (ngModelChange)="task.startDate = $event" />
+    <span *ngIf="!editMode">{{ user.enterDate | date:'yyyy-MM-dd' }}</span>
+  </div>
+
+  <div>
+    <label>Site Access</label>
+    <app-drag-drop-list titleList1="Available path" [(dataSource1)]="availablePath" titleList2="Authorize path" [(dataSource2)]="userPath" propertyPath="path"></app-drag-drop-list>
+  </div>
+
+  <div>
+    <button class="btn" (click)="saveUser();"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+    <button type="button" class="btn" [disabled]="!(user.id > 0)" (click)="deleteUser();"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+  </div>
+</div>

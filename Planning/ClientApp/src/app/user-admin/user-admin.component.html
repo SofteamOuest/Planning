@@ -1,0 +1,58 @@
+<table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Date of birth</th>
+      <th>Enter Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of dataSource">
+      <td>
+        <span *ngIf="(user.dateOfBirth | date:'dd-MM-yyyy') == (today | date:'dd-MM-yyyy')" class="glyphicon glyphicon-gift"></span>
+      </td>
+      <td>
+        <div>{{ user.id }}</div>
+      </td>
+      <td>
+        <div>{{ user.firstName }}</div>
+      </td>
+      <td>
+        <div>{{ user.lastName }}</div>
+      </td>
+      <td>
+        <div>{{ user.dateOfBirth | date:'dd-MM-yyyy' }}</div>
+      </td>
+      <td>
+        <div>{{ user.enterDate | date:'dd-MM-yyyy' }}</div>
+      </td>
+      <td>
+        <div class="btn-group" role="group">
+          <button type="button" *ngIf="isEditing && editingItem.id == user.id" class="btn btn-secondary glyphicon glyphicon-ok"></button>
+          <button type="button" *ngIf="isEditing && editingItem.id == user.id" class="btn btn-secondary glyphicon glyphicon-remove" (click)="cancel();"></button>
+          <button type="button" *ngIf="!isEditing" class="btn btn-secondary glyphicon glyphicon-pencil"></button>
+          <button type="button" *ngIf="!isEditing" class="btn btn-secondary glyphicon glyphicon-trash"></button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>
+        <div class="btn-group" role="group">
+          <button type="button" *ngIf="!isEditing" class="btn btn-secondary glyphicon glyphicon-plus" (click)="create();"></button>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>

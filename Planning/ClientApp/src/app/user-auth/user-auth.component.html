@@ -1,0 +1,25 @@
+<h1>
+  Authentification
+</h1>
+
+<form #userAuthForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" class="form-control" placeholder="Username"
+           [(ngModel)]="username"(keyup.enter)="login();"
+           required name="username" #usernameInput="ngModel" />
+    <div [hidden]="usernameInput.valid || usernameInput.pristine" class="alert alert-danger">
+      Username is required.
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control" placeholder="Password"
+           [(ngModel)]="password" (keyup.enter)="login();"
+           required name="password" #passwordInput="ngModel" />
+    <div [hidden]="passwordInput.valid || passwordInput.pristine" class="alert alert-danger">
+      Password is required.
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="!userAuthForm.form.valid" (click)="login();">Login</button>
+</form>

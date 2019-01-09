@@ -1,0 +1,24 @@
+<div id="main">
+  <div>
+    <label *ngIf="titleList1">{{ titleList1 }}</label>
+    <div #list1 dragula="HANDLES" [(dragulaModel)]="dataSource1">
+      <div *ngFor="let item of dataSource1">
+        <span class="handle glyphicon glyphicon-option-vertical">{{ display(item) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <span class="glyphicon glyphicon-arrow-left"></span>
+    <span class="glyphicon glyphicon-arrow-right"></span>
+  </div>
+
+  <div>
+    <label *ngIf="titleList2">{{ titleList2 }}</label>
+    <div #list2 dragula="HANDLES" [(dragulaModel)]="dataSource2">
+      <div *ngFor="let item of dataSource2">
+        <span class="handle glyphicon glyphicon-option-vertical">{{ display(item) }}</span>
+      </div>
+    </div>
+  </div>
+</div>

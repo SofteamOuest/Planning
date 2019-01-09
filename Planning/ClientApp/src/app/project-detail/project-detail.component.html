@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <label>Project Name</label>
+    <input type="text" class="form-control" [(ngModel)]="project.name" />
+  </div>
+  <div>
+    <label for="activeProject">Active</label>
+    <input id="activeProject" type="checkbox" [(ngModel)]="project.isActive" />
+  </div>
+  <div>
+    <label>Owner</label>
+    <span *ngIf="project.owner">{{ project.owner.firstName }}</span>
+    <span *ngIf="project.owner">{{ project.owner.lastName }}</span>
+  </div>
+  
+  <div>
+    <label>Task</label>
+    <table class="table" datatable [dtOptions]="dtOptionsTask" [dtTrigger]="dtTriggerTask">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Start date</th>
+          <th>End date</th>
+          <th>Active</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of project.projectTasks">
+          <td>
+            <span class="glyphicon glyphicon-menu-right"></span>
+            <!--<span class="glyphicon glyphicon-menu-down"></span>-->
+          </td>
+          <td>
+            <span *ngIf="task.isEdited" class="glyphicon glyphicon-pencil"></span>
+          </td>
+          <td>{{ task.id }}</td>
+          <td><input type="text" class="form-control" [(ngModel)]="task.name" (change)="task.isEdited = true" /></td>
+          <td><input type="date" class="form-control" ngbDatepicker [ngModel]="task.startDate | date:'yyyy-MM-dd'" (ngModelChange)="task.startDate = $event" (change)="task.isEdited = true" /></td>
+          <td><input type="date" class="form-control" ngbDatepicker [ngModel]="task.endDate | date:'yyyy-MM-dd'" (ngModelChange)="task.startDate = $event" (change)="task.isEdited = true" /></td>
+          <td><input type="checkbox" [(ngModel)]="task.isActive" (change)="task.isEdited = true" /></td>
+          <td>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-secondary glyphicon glyphicon-trash"></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><button type="button" class="btn glyphicon glyphicon-plus" [disabled]="!(project.id > 0)" (click)="addProjectTask();"></button></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div>
+    <button class="btn" (click)="saveProject();"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+    <button type="button" class="btn" [disabled]="!(project.id > 0)" (click)="deleteProject();"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+  </div>
+</div>

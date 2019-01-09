@@ -1,0 +1,51 @@
+<table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let project of dataSource">
+      <td>
+        <div>{{ project.id }}</div>
+      </td>
+      <td>
+        <div>
+          <span *ngIf="!isEditing || editingItem.id != project.id">{{ project.name }}</span>
+        </div>
+      </td>
+      <td>
+        <div>{{ project.owner }}</div>
+      </td>
+      <td>
+        <div>
+          <span *ngIf="project.isActive" class="glyphicon glyphicon-play"></span>
+          <span *ngIf="!project.isActive" class="glyphicon glyphicon-stop"></span>
+        </div>
+      </td>
+      <td>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary glyphicon glyphicon-pencil" [routerLink]='["/project", project.id]'></button>
+          <button type="button" class="btn btn-secondary glyphicon glyphicon-trash" (click)="removeProject(project.id);"></button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary glyphicon glyphicon-plus" [routerLink]='["/project-detail"]'></button>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>

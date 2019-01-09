@@ -1,8 +1,22 @@
 version: '3.4'
 
 services:
+
+  planning-db: 
+    image: postgres:11
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80  
+      - POSTGRES_USER=ddelotel
+      - POSTGRES_PASSWORD=toto
+      - POSTGRES_DB=Planning
+
   planning:
     image: ${DOCKER_REGISTRY}planning
     build:
       context: .
-      dockerfile: Planning\Dockerfile
+      dockerfile: Planning/Dockerfile
+    ports:
+      - 80:80
+    depends_on: 
+      - planning-db
